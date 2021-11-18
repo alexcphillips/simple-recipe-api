@@ -21,10 +21,10 @@ describe("POST /recipes", () => {
         name: "butteredBagel",
         ingredients: ["1 bagel", "butter"],
         instructions: ["cut the bagel", "spread butter on bagel"]
-      });
+      })
+      .expect(200);
 
     expect(recipes.length === initialrecipesLength + 1);
-    expect(response.statusCode).toBe(200);
   });
 
   it("send error response when recipe already exists", async () => {
@@ -44,9 +44,9 @@ describe("POST /recipes", () => {
           "Add tea leaves/tea bags, chai masala; mix and steep for 3-4 minutes",
           "Remove mixture from heat; strain and enjoy"
         ]
-      });
+      })
+      .expect(400);
 
     expect(recipes.length === initialrecipesLength);
-    expect(response.statusCode).toBe(400);
   });
 });
