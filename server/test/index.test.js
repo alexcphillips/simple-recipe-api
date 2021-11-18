@@ -4,6 +4,15 @@ const initialrecipesLength = recipes.length;
 
 const app = require("../app");
 
+describe("GET /recipes", () => {
+  it("sends array of recipe names", async () => {
+    const response = await request(app).get("/recipes").send().expect(200);
+    const { recipeNames } = response.body;
+    expect(typeof recipeNames === "array");
+    expect(recipeNames.length).toBe(3);
+  });
+});
+
 describe("POST /recipes", () => {
   it("given a new recipe, adds to recipes and status 201", async () => {
     const response = await request(app)
