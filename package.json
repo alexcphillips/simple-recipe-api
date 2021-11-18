@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A simple recipe API for my backend assessment",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexcphillips/simple-recipe-api.git"
