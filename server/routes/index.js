@@ -25,12 +25,10 @@ router.get("/recipes/details/:string", (req, res) => {
     res.status(200).send({});
   } else {
     // Send ingredients and instructions in response with status 200
-    res
-      .send({
-        ingredients: desiredRecipe.ingredients,
-        instructions: desiredRecipe.instructions
-      })
-      .status(200);
+    res.status(200).send({
+      ingredients: desiredRecipe.ingredients,
+      instructions: desiredRecipe.instructions
+    });
   }
 });
 
