@@ -63,7 +63,7 @@ router.put("/recipe", (req, res) => {
     }
   }
   if (!isExisting) {
-    res.send({ error: "Recipe does not exist" }).status(404);
+    res.status(404).send({ error: "Recipe does not exist" });
   }
 });
 
