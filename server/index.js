@@ -49,6 +49,23 @@ app.post("/recipes", (req, res) => {
   res.send({}).status(201);
 });
 
+app.put("/recipe", (req, res) => {
+  let isExisting = false;
+  // Iterate through our recipes data, checking for desired object
+  for (let i = 0; i < recipes.length; i++) {
+    if (recipes[i].name === req.body.name) {
+      isExisting = true;
+      // Set desired object to request body
+      recipes[i] = req.body;
+      res.send().status(204);
+      break;
+    }
+  }
+  if (!isExisting) {
+    res.send({ error: "Recipe does not exist" }).status(404);
+  }
+});
+
 app.listen(3000, () => {
   console.log("Connected to server SUCCESSFULLY");
 });
