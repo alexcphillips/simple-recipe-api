@@ -6,7 +6,7 @@ const app = require("../app");
 
 describe("POST /recipes", () => {
   it("given a new recipe, adds to recipes and status 201", async () => {
-    response = await request(app)
+    const response = await request(app)
       .post("/recipes")
       .send({
         name: "butteredBagel",
@@ -19,7 +19,7 @@ describe("POST /recipes", () => {
   });
 
   it("send error response when recipe already exists", async () => {
-    response = await request(app)
+    const response = await request(app)
       .post("/recipes")
       .send({
         name: "chai",
