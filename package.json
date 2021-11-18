@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/alexcphillips/simple-recipe-api/issues"
   },
-  "homepage": "https://github.com/alexcphillips/simple-recipe-api#readme"
+  "homepage": "https://github.com/alexcphillips/simple-recipe-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
