@@ -7,11 +7,10 @@ router.get("/recipes", (req, res) => {
   let recipeNames = [];
 
   // Push name values into recipeNames
-  for (let i = 0; i < recipes.length; i++) {
-    result.recipeNames.push(recipes[i].name);
+  for (const recipe of recipes) {
+    recipeNames.push(recipe.name);
   }
 
-  // Send names
   res.status(200).send({ recipeNames });
 });
 
