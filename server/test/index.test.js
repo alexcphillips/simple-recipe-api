@@ -13,6 +13,28 @@ describe("GET /recipes", () => {
   });
 });
 
+describe("GET /recipes/details/:string", () => {
+  it("sends details of desired recipe", async () => {
+    const response = await request(app)
+      .get("/recipes/details/chai")
+      .send()
+      .expect(200);
+    const { ingredients, instructions } = response.body;
+    expect(ingredients.length).toBe(4);
+    expect(instructions.length).toBe(4);
+  });
+
+  it("send empty object if not found, with status code 200", async () => {
+    const response = await request(app)
+      .get("/recipes/details/ABSENT_RECIPE")
+      .send()
+      .expect(200);
+
+    expect(typeof response.body === "object");
+    expect(!response.body.length);
+  });
+});
+
 describe("POST /recipes", () => {
   it("given a new recipe, adds to recipes and status 201", async () => {
     const response = await request(app)
