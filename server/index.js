@@ -35,6 +35,20 @@ app.get("/recipes/details/:string", (req, res) => {
   }
 });
 
+app.post("/recipes", (req, res) => {
+  // Loop through the nested objects using a for of loop
+  for (let recipe of recipes) {
+    if (recipe.name === req.body.name) {
+      // If it exists, send an error message and status code 400 in the response
+      res.send({ error: "Recipe already exists" }).status(400);
+      break;
+    }
+  }
+  // If the above loop didn't find a match, we know this is a new recipe. Add new recipe to recipes and send status 201
+  recipes.push(req.body);
+  res.send({}).status(201);
+});
+
 app.listen(3000, () => {
   console.log("Connected to server SUCCESSFULLY");
 });
