@@ -44,7 +44,7 @@ describe("POST /recipes", () => {
         ingredients: ["1 bagel", "butter"],
         instructions: ["cut the bagel", "spread butter on bagel"]
       })
-      .expect(200);
+      .expect(201);
 
     expect(recipes.length === initialrecipesLength + 1);
   });

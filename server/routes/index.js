@@ -46,7 +46,7 @@ router.post("/recipes", (req, res) => {
   // if it doesn't exist, add new recipe to recipes and send status 201
   if (!isExisting) {
     recipes.push(req.body);
-    res.status(200).send({});
+    res.status(201).send({});
   }
 });
 
