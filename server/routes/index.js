@@ -1,5 +1,5 @@
 const express = require("express");
-const { recipes } = require("../data.json");
+const { recipes } = require("../data/data.json");
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get("/recipes", (req, res) => {
   }
 
   // Send names
-  res.send({ recipeNames }).status(200);
+  res.status(200).send({ recipeNames });
 });
 
 router.get("/recipes/details/:string", (req, res) => {
@@ -23,7 +23,7 @@ router.get("/recipes/details/:string", (req, res) => {
 
   // If false, send empty object
   if (!desiredRecipe) {
-    res.send({}).status(200);
+    res.status(200).send({});
   } else {
     // Send ingredients and instructions in response with status 200
     res
@@ -36,18 +36,21 @@ router.get("/recipes/details/:string", (req, res) => {
 });
 
 router.post("/recipes", (req, res) => {
-  console.log(recipes);
+  let isExisting = false;
   // Loop through the nested objects using a for of loop
-  for (let recipe in recipes) {
+  for (const recipe of recipes) {
     if (recipe.name === req.body.name) {
       // If it exists, send an error message and status code 400 in the response
-      res.send({ error: "Recipe already exists" }).status(400);
+      res.status(400).send({ error: "Recipe already exists" });
+      isExisting = true;
       break;
     }
   }
-  // If the above loop didn't find a match, we know this is a new recipe. Add new recipe to recipes and send status 201
-  recipes.push(req.body);
-  res.send({}).status(201);
+  // if it doesn't exist, add new recipe to recipes and send status 201
+  if (!isExisting) {
+    recipes.push(req.body);
+    res.status(200).send({});
+  }
 });
 
 router.put("/recipe", (req, res) => {
@@ -58,7 +61,7 @@ router.put("/recipe", (req, res) => {
       isExisting = true;
       // Set desired object to request body
       recipes[i] = req.body;
-      res.send().status(204);
+      res.status(204).send();
       break;
     }
   }
