@@ -72,3 +72,34 @@ describe("POST /recipes", () => {
     expect(recipes.length === initialrecipesLength);
   });
 });
+
+describe("PUT /recipes", () => {
+  it("updates recipe", async () => {
+    const preUpdateBagel = recipes.find((recipe) => {
+      return recipe.name === "butteredBagel";
+    });
+
+    console.log("BINGO !!!! " + preUpdateBagel);
+
+    const response = await request(app)
+      .put("/recipe")
+      .send({
+        name: "butteredBagel",
+        ingredients: ["1 bagel", "2 tbsp butter"],
+        instructions: ["cut the bagel", "spread butter on bagel"]
+      })
+      .expect(204);
+
+    expect(typeof response.body === "object");
+    expect(!response.body.length);
+  });
+
+  it("if absent recipe, sends error and status code 404", async () => {
+    const response = await request(app)
+      .put("/recipe")
+      .send({
+        name: "ABSENT_RECIPE"
+      })
+      .expect(404);
+  });
+});
