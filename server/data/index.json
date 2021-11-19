@@ -1,5 +1,5 @@
 {
-  "recipes": [
+  "data": [
     {
       "name": "scrambledEggs",
       "ingredients": ["1 tsp oil", "2 eggs", "salt"],
