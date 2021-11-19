@@ -29,3 +29,21 @@ exports.findDetails = (req, res) => {
     });
   }
 };
+
+exports.addOne = (req, res) => {
+  let isExisting = false;
+  // Loop through the nested objects using a for of loop
+  for (const recipe of data) {
+    if (recipe.name === req.body.name) {
+      // If it exists, send an error message and status code 400 in the response
+      res.status(400).send({ error: "Recipe already exists" });
+      isExisting = true;
+      break;
+    }
+  }
+  // if it doesn't exist, add new recipe to recipes and send status 201
+  if (!isExisting) {
+    data.push(req.body);
+    return res.status(201).send({});
+  }
+};
