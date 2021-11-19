@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { recipes } = require("../data");
-const initialrecipesLength = recipes.length;
+const { data } = require("../data");
+const initialDataLength = data.length;
 
 const app = require("../app");
 
@@ -46,7 +46,7 @@ describe("POST /recipes", () => {
       })
       .expect(201);
 
-    expect(recipes.length === initialrecipesLength + 1);
+    expect(data.length === initialDataLength + 1);
   });
 
   it("send error response when recipe already exists", async () => {
@@ -69,17 +69,15 @@ describe("POST /recipes", () => {
       })
       .expect(400);
 
-    expect(recipes.length === initialrecipesLength);
+    expect(data.length === initialDataLength);
   });
 });
 
 describe("PUT /recipes", () => {
   it("updates recipe", async () => {
-    const preUpdateBagel = recipes.find((recipe) => {
+    const preUpdateBagel = data.find((recipe) => {
       return recipe.name === "butteredBagel";
     });
-
-    console.log("BINGO !!!! " + preUpdateBagel);
 
     const response = await request(app)
       .put("/recipe")
