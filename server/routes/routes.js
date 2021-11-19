@@ -4,7 +4,6 @@ exports.findAll = (req, res) => {
   let recipeNames = [];
 
   // Push name values into recipeNames
-  console.log(data);
   for (const recipe of data) {
     recipeNames.push(recipe.name);
   }
